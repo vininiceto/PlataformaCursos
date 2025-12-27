@@ -33,5 +33,10 @@ public class CursoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createCurso(curso));
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteCurso(@PathVariable String id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.deleteCurso(id));
+    }
+
 
 }

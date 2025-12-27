@@ -29,6 +29,11 @@ public class CursoService {
         return Optional.of(Optional.of(repository.findCursoByNameAndCategory(name, category)).orElseThrow(() -> new CursoNotFound("Name or category invalid!")));
     }
 
+    public String deleteCurso(String id){
+        repository.deleteById(Long.parseLong(id));
+        return "Course deleted as requested.";
+    }
+
 
 
 }
