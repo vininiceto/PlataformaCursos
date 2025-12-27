@@ -8,6 +8,10 @@ public interface CursoRepository extends JpaRepository<Curso, Long> {
 
     Curso findCursoByNameAndCategory(String name, String category);
 
+    Curso findByName(String name);
+
+    Curso findByCategory(String category);
+
 
 
 }

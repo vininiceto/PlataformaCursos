@@ -1,5 +1,6 @@
 package br.com.vininiceto.plataformacursos.service;
 
+import br.com.vininiceto.plataformacursos.exceptions.CursoNotFound;
 import br.com.vininiceto.plataformacursos.model.Curso;
 import br.com.vininiceto.plataformacursos.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,11 @@ public class CursoService {
     }
 
     public Optional<Curso> findById(String id){
-        return Optional.of(repository.findById(Long.parseLong(id)).orElseThrow(() -> new NullPointerException("Id invalid!")));
+        return Optional.of(repository.findById(Long.parseLong(id)).orElseThrow(() -> new CursoNotFound("Id invalid!")));
     }
 
     public Optional<Curso> findCursoByNameAndCategory(String name, String category){
-        return Optional.ofNullable(Optional.of(repository.findCursoByNameAndCategory(name, category)).orElseThrow(() -> new NullPointerException("Name or category invalid!")));
+        return Optional.of(Optional.of(repository.findCursoByNameAndCategory(name, category)).orElseThrow(() -> new CursoNotFound("Name or category invalid!")));
     }
 
 
