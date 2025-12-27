@@ -1,0 +1,33 @@
+package br.com.vininiceto.plataformacursos.service;
+
+import br.com.vininiceto.plataformacursos.model.Curso;
+import br.com.vininiceto.plataformacursos.repository.CursoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.Optional;
+
+@Service
+public class CursoService {
+
+    @Autowired
+    CursoRepository repository;
+
+
+    public Curso createCurso(Curso curso) {
+
+        return repository.saveAndFlush(curso);
+    }
+
+    public Optional<Curso> findById(String id){
+        return Optional.of(repository.findById(Long.parseLong(id)).orElseThrow(() -> new NullPointerException("Id invalid!")));
+    }
+
+    public Optional<Curso> findCursoByNameAndCategory(String name, String category){
+        return Optional.ofNullable(Optional.of(repository.findCursoByNameAndCategory(name, category)).orElseThrow(() -> new NullPointerException("Name or category invalid!")));
+    }
+
+
+
+}
