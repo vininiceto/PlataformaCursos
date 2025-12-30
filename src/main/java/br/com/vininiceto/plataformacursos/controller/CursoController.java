@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,6 +21,11 @@ public class CursoController {
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Curso>> findCursoById(@PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
+    }
+
+    @GetMapping("/todos")
+    public ResponseEntity<Optional<List<Curso>>> findAllCursos(){
+        return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(service.findAllCurso()));
     }
 
     @GetMapping("/{name}/{category}")
@@ -36,6 +42,12 @@ public class CursoController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCurso(@PathVariable String id){
         return ResponseEntity.status(HttpStatus.OK).body(service.deleteCurso(id));
+    }
+
+    @PatchMapping("/status/{id}")
+    public ResponseEntity<Optional<Curso>> changeStatus(@PathVariable String id){
+        Curso cursoAtualizado = service.changeStatusCurso(id);
+        return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(cursoAtualizado));
     }
 
 
